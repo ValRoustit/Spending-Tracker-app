@@ -9,7 +9,14 @@ class Transaction
         @name = options['name']
         @amount = options['amount']
         @merchant_id = options['merchant_id'].to_i
-        @tag_id = options['tag_id'].to_id
+        @tag_id = options['tag_id'].to_i
+    end
+
+    def save()
+        sql = "INSERT INTO transactions (name, amount, merchant_id, tag_id) VALUES ($1, $2, $3, $4) RETURNING id"
+        values = [@name, @amount, @merchant_id, @tag_id]
+        transaction = SqlRunner.run(sql, values)[0]
+        @id = transaction['id'].to_i
     end
 
 end
