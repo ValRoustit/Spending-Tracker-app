@@ -4,6 +4,7 @@ require_relative('models/transaction')
 
 require('pry')
 
+Transaction.delete_all()
 Merchant.delete_all()
 Tag.delete_all()
 
@@ -13,5 +14,6 @@ tag1 = Tag.new({'name' => 'clothes'})
 tag1.save()
 
 transaction1 = Transaction.new({'name'=>'shoes','amount'=>100,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id})
+transaction1.save()
 binding.pry
 nil

@@ -19,4 +19,19 @@ class Transaction
         @id = transaction['id'].to_i
     end
 
+
+    def delete()
+        sql = "DELETE FROM transactions WHERE id = $1"
+        values = [@id]
+        SqlRunner.run(sql, values)
+    end
+
+    def self.delete_all()
+        sql = "DELETE FROM transactions"
+        SqlRunner.run(sql)
+    end
+
+    def self.map_items(transaction_data)
+        return transaction_data.map { |transaction| Transaction.new(transaction) }
+    end
 end
