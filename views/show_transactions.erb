@@ -1,0 +1,7 @@
+<h3>My spendings</h3>
+<h3><a href='/spending-tracker/new'>New spending</a></h3>
+
+
+<% for transaction in @transactions %>
+    <p><a href="/spending-tracker/<%= transaction.id%>"><%= transaction.name %></a></p>
+<% end %>
