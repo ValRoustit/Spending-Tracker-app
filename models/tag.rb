@@ -10,7 +10,7 @@ class Tag
     end
 
     def save()
-        sql = "INSERT INTO tags (name) VALUES ($1) RETURNING id"
+        sql = "INSERT INTO tags(name) VALUES ($1) RETURNING id"
         values = [@name]
         result = SqlRunner.run(sql, values)
         id = result.first["id"]
@@ -26,7 +26,7 @@ class Tag
     end
 
     def update()
-        sql = "UPDATE tags SET (name) = ($1) WHERE id = $2"
+        sql = "UPDATE tags SET name = $1 WHERE id = $2"
         values = [@name, @id]
         SqlRunner.run(sql, values)
     end
