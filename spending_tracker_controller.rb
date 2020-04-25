@@ -12,33 +12,49 @@ get '/spending-tracker' do
     erb(:index)
 end
 
-# show_transactions
+# show transactions
 get '/spending-tracker/my-spendings' do
     @transactions = Transaction.all
     erb(:show_transactions)
 end
 
-# show_tags
+# show tags
 get '/spending-tracker/my-tags' do
     @tags = Tag.all
     erb(:show_tags)
 end
 
-# show_merchants
+# show merchants
 get '/spending-tracker/my-merchants' do
     @merchants = Merchant.all
+    @merchants = Merchant.all
+    @tags = Tag.all
     erb(:show_merchants)
+end
+
+# show transaction_id
+get '/spending-tracker/my-spendings/:id' do
+    @transation = Transaction.find(params[:id])
+    @merchants = Merchant.all
+    @tags = Tag.all
+    erb(:show_transaction_data)
 end
 
 # new merchant
 
 # new transaction
 get '/spending-tracker/new' do
+    @merchants = Merchant.all
+    @tags = Tag.all
     erb(:new_spending)
 end
 
-
 # create
+post '/spending-tracker/my-spendings' do
+    p params
+    Transaction.new(params).save
+    redirect to '/spending-tracker/my-spendings'
+end
 
 # edit
 

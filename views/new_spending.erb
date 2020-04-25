@@ -1,0 +1,32 @@
+<form method='post' action='/spending-tracker/my-spendings'>
+
+    <label for="name">name:</label>
+    <input
+        id="name"
+        type="text"
+        name="name"/>
+
+    <label for="amount">amount:</label>
+    <input
+        id="amount"
+        type="number"
+        name="amount"/>
+
+    <label for="merchant">merchant:</label>
+    <select name="merchant_id" id="merchant-id">
+        <% for merchant in @merchants %>
+            <option value="<%= merchant.id %>"><%= merchant.name %></option>
+        <% end %>
+    </select>
+
+    <label for="tag">tag:</label>
+    <select name="tag_id" id="tag-id">
+        <% for tag in @tags %>
+            <option value="<%= tag.id %>"><%= tag.name %></option>
+        <% end %>
+    </select>
+
+
+    <input type="submit" value="New spending">
+
+</form>
