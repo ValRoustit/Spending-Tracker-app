@@ -1,4 +1,4 @@
-<form method='post' action='/spending-tracker/my-spendings'>
+<form method="post" action="/spending-tracker/my-spendings/<%= @transaction.id %>">
 
     <label for="name">name:</label>
     <input
@@ -37,6 +37,6 @@
     </select>
 
 
-    <input type="submit" value="Update">
-
+    <input type="submit" id="delete" name="update" value="Update">
+    <input type="submit" id="delete" name="delete" value="Delete"></form>
 </form>

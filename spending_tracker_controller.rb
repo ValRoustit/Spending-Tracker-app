@@ -48,12 +48,18 @@ get '/spending-tracker/new' do
 end
 
 # create
-post '/spending-tracker/my-spendings' do
+post '/spending-tracker/new' do
     Transaction.new(params).save
     redirect to '/spending-tracker/my-spendings'
 end
 
 # edit
+post '/spending-tracker/my-spendings/:id' do
+    transaction = Transaction.new(params)
+    transaction.update if params[:update] == "Update"
+    transaction.delete if params[:delete] == "Delete"
+    redirect to '/spending-tracker/my-spendings'
+end
 
 # update
 
