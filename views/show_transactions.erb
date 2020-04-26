@@ -1,10 +1,24 @@
 <h3>My spendings</h3>
 <h3><a href='/spending-tracker/new'>New spending</a></h3>
 
+<table>
+    <thead>
+        <tr>
+        <th>Transaction</th>
+        <th>amount</th>
+        <th>Merchant</th>
+        <th>Tag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for transaction in @transactions %>
+            <tr>
+                <td><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %> </a></td>
+                <td>£<%= transaction.amount %> </td>
+                <td><%= transaction.merchant.name %> </td>
+                <td><%= transaction.tag.name %> </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
 
-<% for transaction in @transactions %>
-    <p><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %></a>
-    £<%= transaction.amount %>
-    <%= transaction.merchant.name %>
-    <%= transaction.tag.name %></p>
-<% end %>

@@ -38,8 +38,6 @@ get '/spending-tracker/my-spendings/:id' do
     erb(:show_transaction_data)
 end
 
-# new merchant
-
 # new transaction
 get '/spending-tracker/new' do
     @merchants = Merchant.all
@@ -47,20 +45,20 @@ get '/spending-tracker/new' do
     erb(:new_transaction)
 end
 
-# create
+# new merchant
+
+#----------------------------------------------------------------
+
+# create transaction
 post '/spending-tracker/new' do
     Transaction.new(params).save
     redirect to '/spending-tracker/my-spendings'
 end
 
-# edit
+# edit transaction
 post '/spending-tracker/my-spendings/:id' do
     transaction = Transaction.new(params)
     transaction.update if params[:update] == "Update"
     transaction.delete if params[:delete] == "Delete"
     redirect to '/spending-tracker/my-spendings'
 end
-
-# update
-
-# delete
