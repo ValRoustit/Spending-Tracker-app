@@ -1,21 +1,24 @@
-<h3>My tags</h3>
-
-<table>
-    <tbody>
-        <% for tag in @tags %>
-            <tr>
-                <td><%= tag.name %></td>
-            </tr>
-        <% end %>
-    </tbody>
-</table>
-
-
-
-
-
 
 <form method="post" action="/spending-tracker/my-tags">
-    <input type="submit" id="delete" name="update" value="Update">
-    <input type="submit" id="delete" name="delete" value="Delete"></form>
+
+<h3>My tags</h3>
+
+<label for="name"></label>
+<input
+    id="name"
+    type="text"
+    name="name"
+    value="..."/>
+
+
+        <% for tag in @tags %>
+                <p><%= tag.name %></p>
+        <% end %>
+
+
+
+<input type="submit" id="new" name="new" value="New">
+<input type="submit" id="update" name="update" value="Update">
+<input type="submit" id="delete" name="delete" value="Delete">
+
 </form>

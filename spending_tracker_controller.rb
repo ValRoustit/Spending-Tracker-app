@@ -62,3 +62,12 @@ post '/spending-tracker/my-spendings/:id' do
     transaction.delete if params[:delete] == "Delete"
     redirect to '/spending-tracker/my-spendings'
 end
+
+# edit tags
+post '/spending-tracker/my-tags' do
+    tag = Tag.new(params)
+    tag.save if params[:new] == "New"
+    tag.update if params[:update] == "Update"
+    tag.delete if params[:delete] == "Delete"
+    redirect to '/spending-tracker/my-tags'
+end
