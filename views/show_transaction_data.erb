@@ -1,0 +1,42 @@
+<form method='post' action='/spending-tracker/my-spendings'>
+
+    <label for="name">name:</label>
+    <input
+        id="name"
+        type="text"
+        name="name"
+        value="<%= @transaction.name %>"/>
+
+    <label for="amount">price: £</label>
+    <input
+        id="amount"
+        type="number"
+        name="amount"
+        value="<%= @transaction.amount %>"/>
+
+    <label for="merchant">merchant:</label>
+    <select name="merchant_id" id="merchant-id">
+        <% for merchant in @merchants %>
+            <% if merchant.id == @transaction.merchant_id %>
+                <option value=<%= merchant.id %> selected><%= merchant.name %></option>
+            <% else %>
+                <option value=<%= merchant.id %>><%= merchant.name %></option>
+            <% end %>
+        <% end %>
+    </select>
+
+    <label for="tag">tag:</label>
+    <select name="tag_id" id="tag-id">
+        <% for tag in @tags %>
+            <% if tag.id == @transaction.tag_id %>
+                <option value=<%= tag.id %> selected><%= tag.name %></option>
+            <% else %>
+                <option value=<%= tag.id %>><%= tag.name %></option>
+            <% end %>
+        <% end %>
+    </select>
+
+
+    <input type="submit" value="Update">
+
+</form>

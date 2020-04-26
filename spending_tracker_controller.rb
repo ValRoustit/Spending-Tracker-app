@@ -32,7 +32,9 @@ end
 
 # show transaction_id
 get '/spending-tracker/my-spendings/:id' do
-    @transation = Transaction.find(params[:id])
+    @merchants = Merchant.all
+    @tags = Tag.all
+    @transaction = Transaction.find(params[:id])
     erb(:show_transaction_data)
 end
 
@@ -42,12 +44,11 @@ end
 get '/spending-tracker/new' do
     @merchants = Merchant.all
     @tags = Tag.all
-    erb(:new_spending)
+    erb(:new_transaction)
 end
 
 # create
 post '/spending-tracker/my-spendings' do
-    p params
     Transaction.new(params).save
     redirect to '/spending-tracker/my-spendings'
 end
