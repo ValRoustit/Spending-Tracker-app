@@ -27,16 +27,12 @@ end
 # show merchants
 get '/spending-tracker/my-merchants' do
     @merchants = Merchant.all
-    @merchants = Merchant.all
-    @tags = Tag.all
     erb(:show_merchants)
 end
 
 # show transaction_id
 get '/spending-tracker/my-spendings/:id' do
     @transation = Transaction.find(params[:id])
-    @merchants = Merchant.all
-    @tags = Tag.all
     erb(:show_transaction_data)
 end
 

@@ -4,4 +4,7 @@
 
 <% for transaction in @transactions %>
     <p><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %></a></p>
+    <p>£<%= transaction.amount %></p>
+    <p><%= transaction.merchant.name %></p>
+    <p><%= transaction.tag.name %></p>
 <% end %>

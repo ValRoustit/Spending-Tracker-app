@@ -43,6 +43,18 @@ class Transaction
         return Transaction.map_items(transaction_data)
     end
 
+    def tag()
+        return [] if (@tag_id == 0)
+        tag = Tag.find(@tag_id)
+        return tag
+    end
+
+    def merchant()
+        return [] if (@merchant_id == 0)
+        merchant = Merchant.find(@merchant_id)
+        return merchant
+    end
+
     def delete()
         sql = "DELETE FROM transactions WHERE id = $1"
         values = [@id]
