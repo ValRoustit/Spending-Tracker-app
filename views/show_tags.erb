@@ -1,4 +1,3 @@
-
 <form method="post" action="/spending-tracker/my-tags">
 
 <h3>My tags</h3>
@@ -11,14 +10,9 @@
     value="..."/>
 
 
-        <% for tag in @tags %>
-                <p><%= tag.name %></p>
-        <% end %>
-
-
+<% for tag in @tags %>
+    <p><a href="/spending-tracker/my-tags/<%= tag.id %>"><%= tag.name %></a></p>
+<% end %>
 
 <input type="submit" id="new" name="new" value="New">
-<input type="submit" id="update" name="update" value="Update">
-<input type="submit" id="delete" name="delete" value="Delete">
-
 </form>

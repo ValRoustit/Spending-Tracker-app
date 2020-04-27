@@ -1,16 +1,9 @@
 require('sinatra')
 require('sinatra/contrib/all')
-require_relative('models/merchant')
-require_relative('models/tag')
-require_relative('models/transaction')
-also_reload('./models/*')
-require('pry')
-
-
-# index
-get '/spending-tracker' do 
-    erb(:index)
-end
+require_relative('../models/tag')
+require_relative('../models/merchant')
+require_relative('../models/transaction')
+also_reload('../models/*')
 
 # show transactions
 get '/spending-tracker/my-spendings' do
@@ -18,19 +11,6 @@ get '/spending-tracker/my-spendings' do
     erb(:show_transactions)
 end
 
-# show tags
-get '/spending-tracker/my-tags' do
-    @tags = Tag.all
-    erb(:show_tags)
-end
-
-# show merchants
-get '/spending-tracker/my-merchants' do
-    @merchants = Merchant.all
-    erb(:show_merchants)
-end
-
-# show transaction_id
 get '/spending-tracker/my-spendings/:id' do
     @merchants = Merchant.all
     @tags = Tag.all
@@ -44,8 +24,6 @@ get '/spending-tracker/new' do
     @tags = Tag.all
     erb(:new_transaction)
 end
-
-# new merchant
 
 #----------------------------------------------------------------
 
@@ -61,13 +39,4 @@ post '/spending-tracker/my-spendings/:id' do
     transaction.update if params[:update] == "Update"
     transaction.delete if params[:delete] == "Delete"
     redirect to '/spending-tracker/my-spendings'
-end
-
-# edit tags
-post '/spending-tracker/my-tags' do
-    tag = Tag.new(params)
-    tag.save if params[:new] == "New"
-    tag.update if params[:update] == "Update"
-    tag.delete if params[:delete] == "Delete"
-    redirect to '/spending-tracker/my-tags'
 end
