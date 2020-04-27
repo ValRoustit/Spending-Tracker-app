@@ -18,7 +18,43 @@ class Budget
         @id = budget['id'].to_i
     end
 
+    def self.find(id)
+        sql = "SELECT * FROM budgets WHERE id = $1"
+        values = [id]
+        result = SqlRunner.run(sql, values).first
+        return Budget.new(result)
+    end
 
+    def update()
+        sql = "UPDATE budgets SET name = $1 WHERE id = $2"
+        values = [@name, @id]
+        SqlRunner.run(sql, values)
+    end
+
+    def transactions()
+        sql = "SELECT * FROM transactions WHERE budget_id = $1"
+        values = [@id]
+        transactions_data = SqlRunner.run(sql, values)
+        return Transaction.map_items(transactions_data)
+    end
+
+    def self.all()
+        sql = "SELECT * FROM budgets"
+        budget_data = SqlRunner.run(sql)
+        return map_items(budget_data)
+    end
+
+    def delete()
+        return nil if @id == 1
+        transactions = self.transactions()
+        transactions.each do |transaction|
+            transaction.budget_id = 1
+            transaction.update()
+        end
+        sql = "DELETE FROM budgets WHERE id = $1"
+        values = [@id]
+        SqlRunner.run(sql, values)
+    end
 
     def self.delete_all()
         sql = "DELETE FROM budgets"
