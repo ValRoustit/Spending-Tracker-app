@@ -28,7 +28,12 @@ end
 # edit tag
 post '/spending-tracker/my-tags/:id' do
     tag = Tag.new(params)
-    tag.update if params[:update] == "Update"
-    tag.delete if params[:delete] == "Delete"
-    redirect to '/spending-tracker/my-tags/:id'
+    if params[:update] == "Update"
+        tag.update
+        redirect to "/spending-tracker/my-tags/#{params[:id]}"
+    end
+    if params[:delete] == "Delete"
+        tag.delete if params[:delete] == "Delete"
+        redirect to '/spending-tracker/my-tags'
+    end
 end

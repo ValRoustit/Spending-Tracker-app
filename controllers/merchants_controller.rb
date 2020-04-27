@@ -28,7 +28,16 @@ end
 # edit merchant
 post '/spending-tracker/my-merchants/:id' do
     merchant = Merchant.new(params)
-    merchant.update if params[:update] == "Update"
-    merchant.delete if params[:delete] == "Delete"
-    redirect to '/spending-tracker/my-merchants/:id'
+    # merchant.update if params[:update] == "Update"
+    # merchant.delete if params[:delete] == "Delete"
+    # redirect to '/spending-tracker/my-merchants'
+    if params[:update] == "Update"
+        p merchant
+        merchant.update
+        redirect to "/spending-tracker/my-merchants/#{params[:id]}"
+    end
+    if params[:delete] == "Delete"
+        merchant.delete
+        redirect to '/spending-tracker/my-merchants'
+    end
 end
