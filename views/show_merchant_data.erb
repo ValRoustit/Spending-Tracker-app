@@ -1,20 +1,20 @@
-<form method="post" action="/spending-tracker/my-tags/<%= @tag.id %>">
+<form method="post" action="/spending-tracker/my-merchants/<%= @merchant.id %>">
 
-<h3>Edit tag</h3>
+<h3>Edit merchant</h3>
 
 <label for="name"></label>
 <input
     id="name"
     type="text"
     name="name"
-    value="<%= @tag.name %>"/>
+    value="<%= @merchant.name %>"/>
 
 <table>
     <thead>
         <tr>
         <th>Transactions</th>
         <th>Amounts</th>
-        <th>Merchants</th>
+        <th>Tags</th>
         </tr>
     </thead>
     <tbody>
@@ -22,7 +22,7 @@
             <tr>
                 <td><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %> </a></td>
                 <td>£<%= transaction.amount %> </td>
-                <td><%= transaction.merchant.name %> </td>
+                <td><%= transaction.tag.name %> </td>
             </tr>
         <% end %>
     </tbody>

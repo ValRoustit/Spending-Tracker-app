@@ -10,7 +10,7 @@ class Merchant
     end
 
     def save()
-        sql = "INSERT INTO merchants (name) VALUES ($1) RETURNING id"
+        sql = "INSERT INTO merchants(name) VALUES ($1) RETURNING id"
         values = [@name]
         result = SqlRunner.run(sql, values)
         id = result.first["id"]
@@ -21,8 +21,7 @@ class Merchant
         sql = "SELECT * FROM merchants WHERE id = $1"
         values = [id]
         result = SqlRunner.run(sql, values).first
-        merchant = Merchant.new(result)
-        return merchant
+        return Merchant.new(result)
     end
 
     def update()
@@ -31,11 +30,17 @@ class Merchant
         SqlRunner.run(sql, values)
     end
 
+    def transactions()
+        sql = "SELECT * FROM transactions WHERE merchant_id = $1"
+        values = [@id]
+        transactions_data = SqlRunner.run(sql, values)
+        return Transaction.map_items(transactions_data)
+    end
+
     def self.all()
         sql = "SELECT * FROM merchants"
         merchant_data = SqlRunner.run(sql)
-        merchants = map_items(merchant_data)
-        return merchants
+        return map_items(merchant_data)
     end
 
     def delete()

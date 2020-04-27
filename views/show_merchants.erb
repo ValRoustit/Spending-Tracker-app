@@ -1,0 +1,18 @@
+<form method="post" action="/spending-tracker/my-merchants">
+
+<h3>My merchants</h3>
+
+<label for="name"></label>
+<input
+    id="name"
+    type="text"
+    name="name"
+    value="..."/>
+
+
+<% for merchant in @merchants %>
+    <p><a href="/spending-tracker/my-merchants/<%= merchant.id %>"><%= merchant.name %></a></p>
+<% end %>
+
+<input type="submit" id="new" name="new" value="New">
+</form>

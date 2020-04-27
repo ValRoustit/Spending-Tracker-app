@@ -11,4 +11,24 @@ get '/spending-tracker/my-merchants' do
     erb(:show_merchants)
 end
 
-# new merchant
+get '/spending-tracker/my-merchants/:id' do
+    @merchant = Merchant.find(params[:id])
+    @transactions = @merchant.transactions()
+    erb(:show_merchant_data)
+end
+
+#----------------------------------------------------------------
+
+# create merchant
+post '/spending-tracker/my-merchants' do
+    Merchant.new(params).save
+    redirect to '/spending-tracker/my-merchants'
+end
+
+# edit merchant
+post '/spending-tracker/my-merchants/:id' do
+    merchant = Merchant.new(params)
+    merchant.update if params[:update] == "Update"
+    merchant.delete if params[:delete] == "Delete"
+    redirect to '/spending-tracker/my-merchants/:id'
+end

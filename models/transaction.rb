@@ -23,8 +23,7 @@ class Transaction
         sql = "SELECT * FROM transactions WHERE id = $1"
         values = [id]
         result = SqlRunner.run(sql, values).first
-        transaction = Transaction.new(result)
-        return transaction
+        return Transaction.new(result)
     end
 
     def update()
@@ -43,29 +42,14 @@ class Transaction
         return Transaction.map_items(transaction_data)
     end
 
-    def self.all_by_tag_id(tag_id)
-        sql = "SELECT * FROM transactions WHERE tag_id = $1"
-        values = [tag_id]
-        transaction_data = SqlRunner.run(sql, values)
-        return Transaction.map_items(transaction_data)
-    end
-
-    # def self.all()
-    #     sql = "SELECT * FROM transactions"
-    #     transaction_data = SqlRunner.run(sql)
-    #     return Transaction.map_items(transaction_data)
-    # end
-
     def tag()
-        return [] if (@tag_id == 0)
-        tag = Tag.find(@tag_id)
-        return tag
+        # return [] if (@tag_id == 0)
+        return Tag.find(@tag_id)
     end
 
     def merchant()
-        return [] if (@merchant_id == 0)
-        merchant = Merchant.find(@merchant_id)
-        return merchant
+        # return [] if (@merchant_id == 0)
+        return Merchant.find(@merchant_id)
     end
 
     def delete()

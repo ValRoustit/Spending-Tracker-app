@@ -21,8 +21,7 @@ class Tag
         sql = "SELECT * FROM tags WHERE id = $1"
         values = [id]
         result = SqlRunner.run(sql, values).first
-        tag = Tag.new(result)
-        return tag
+        return Tag.new(result)
     end
 
     def update()
@@ -31,19 +30,17 @@ class Tag
         SqlRunner.run(sql, values)
     end
 
-    # def transactions()
-    #     sql = "SELECT * FROM transactions WHERE tag_id = $1"
-    #     values = [@id]
-    #     transactions_data = SqlRunner.run(sql, values)
-    #     transactions = Transaction.map_items(transactions_data)
-    #     return transactions
-    # end
+    def transactions()
+        sql = "SELECT * FROM transactions WHERE tag_id = $1"
+        values = [@id]
+        transactions_data = SqlRunner.run(sql, values)
+        return Transaction.map_items(transactions_data)
+    end
 
     def self.all()
         sql = "SELECT * FROM tags"
         tag_data = SqlRunner.run(sql)
-        tags = map_items(tag_data)
-        return tags
+        return map_items(tag_data)
     end
 
     def delete()
