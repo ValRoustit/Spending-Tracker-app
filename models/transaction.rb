@@ -43,14 +43,17 @@ class Transaction
     end
 
     def tag()
-        return [] if (@tag_id == nil)
         return Tag.find(@tag_id)
     end
 
     def merchant()
-        return [] if (@merchant_id == nil)
         return Merchant.find(@merchant_id)
     end
+
+    # def self.total()
+    #     transactions = Transaction.all()
+    #     return transactions.sum(0) {|transaction| transaction.amount.to_f}
+    # end
 
     def delete()
         sql = "DELETE FROM transactions WHERE id = $1"
