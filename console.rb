@@ -15,5 +15,9 @@ tag1.save()
 
 transaction1 = Transaction.new({'name'=>'shoes','amount'=>100,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id})
 transaction1.save()
+transaction1 = Transaction.new({'name'=>'shoes','amount'=>300,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id})
+transaction1.save()
+transaction1 = Transaction.new({'name'=>'shoes','amount'=>200,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id})
+transaction1.save()
 binding.pry
 nil
