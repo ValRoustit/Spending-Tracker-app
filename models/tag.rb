@@ -44,9 +44,10 @@ class Tag
     end
 
     def delete()
+        return nil if @id == 1
         transactions = self.transactions()
         transactions.each do |transaction|
-            transaction.tag_id = nil
+            transaction.tag_id = 1
             transaction.update()
         end
         sql = "DELETE FROM tags WHERE id = $1"
@@ -54,10 +55,10 @@ class Tag
         SqlRunner.run(sql, values)
     end
 
-    def self.delete_all()
-        sql = "DELETE FROM tags"
-        SqlRunner.run(sql)
-    end
+    # def self.delete_all()
+    #     sql = "DELETE FROM tags"
+    #     SqlRunner.run(sql)
+    # end
 
     def self.map_items(tag_data)
         return tag_data.map { |tag| Tag.new(tag) }

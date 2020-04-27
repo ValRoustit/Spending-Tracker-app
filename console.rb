@@ -4,9 +4,9 @@ require_relative('models/transaction')
 
 require('pry')
 
-Transaction.delete_all()
-Merchant.delete_all()
-Tag.delete_all()
+# Transaction.delete_all()
+# Merchant.delete_all()
+# Tag.delete_all()
 
 merchant1 = Merchant.new({'name' => 'Amazon'})
 merchant1.save()

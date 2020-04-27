@@ -44,9 +44,10 @@ class Merchant
     end
 
     def delete()
+        return nil if @id == 1
         transactions = self.transactions()
         transactions.each do |transaction|
-            transaction.merchant_id = nil
+            transaction.merchant_id = 1
             transaction.update()
         end
         sql = "DELETE FROM merchants WHERE id = $1"
@@ -54,10 +55,10 @@ class Merchant
         SqlRunner.run(sql, values)
     end
 
-    def self.delete_all()
-        sql = "DELETE FROM merchants"
-        SqlRunner.run(sql)
-    end
+    # def self.delete_all()
+    #     sql = "DELETE FROM merchants"
+    #     SqlRunner.run(sql)
+    # end
 
     def self.map_items(merchant_data)
         return merchant_data.map { |merchant| Merchant.new(merchant) }

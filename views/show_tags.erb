@@ -11,7 +11,9 @@
 
 
 <% for tag in @tags %>
-    <p><a href="/spending-tracker/my-tags/<%= tag.id %>"><%= tag.name %></a></p>
+    <% if tag.id != 1 %>
+        <p><a href="/spending-tracker/my-tags/<%= tag.id %>"><%= tag.name %></a></p>
+    <% end %>
 <% end %>
 
 <input type="submit" id="new" name="new" value="New">

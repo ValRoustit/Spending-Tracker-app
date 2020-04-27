@@ -11,7 +11,9 @@
 
 
 <% for merchant in @merchants %>
-    <p><a href="/spending-tracker/my-merchants/<%= merchant.id %>"><%= merchant.name %></a></p>
+    <% if merchant.id != 1 %>
+        <p><a href="/spending-tracker/my-merchants/<%= merchant.id %>"><%= merchant.name %></a></p>
+    <% end %>
 <% end %>
 
 <input type="submit" id="new" name="new" value="New">
