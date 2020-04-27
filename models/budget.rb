@@ -38,6 +38,12 @@ class Budget
         return Transaction.map_items(transactions_data)
     end
 
+    def remain()
+        transactions = transactions()
+        spent = transactions.sum(0) {|transaction| transaction.amount.to_f}
+        return @amount - spent
+    end
+
     def self.all()
         sql = "SELECT * FROM budgets"
         budget_data = SqlRunner.run(sql)

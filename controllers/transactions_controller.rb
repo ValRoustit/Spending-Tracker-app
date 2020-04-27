@@ -8,6 +8,7 @@ also_reload('../models/*')
 # show transactions
 get '/spending-tracker/my-spendings' do
     @transactions = Transaction.all
+    @total = Transaction.total
     erb(:show_transactions)
 end
 

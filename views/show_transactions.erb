@@ -1,7 +1,7 @@
 <h3>My spendings</h3>
 <h3><a href='/spending-tracker/new'>New spending</a></h3>
 
-<p>Total spent: £<%= @transactions.sum(0) {|transaction| transaction.amount.to_f} %></p>
+<p>Total spent: £<%= @total %></p>
 <table>
     <thead>
         <tr>

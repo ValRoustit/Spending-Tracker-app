@@ -14,7 +14,10 @@ class Transaction
     end
 
     def save()
-        sql = "INSERT INTO transactions (name, amount, merchant_id, tag_id, budget_id) VALUES ($1, $2, $3, $4, $5) RETURNING id"
+        sql = "INSERT INTO transactions 
+        (name, amount, merchant_id, tag_id, budget_id)
+        VALUES
+        ($1, $2, $3, $4, $5) RETURNING id"
         values = [@name, @amount, @merchant_id, @tag_id, @budget_id]
         transaction = SqlRunner.run(sql, values)[0]
         @id = transaction['id'].to_i
@@ -36,7 +39,6 @@ class Transaction
         SqlRunner.run(sql, values)
     end
 
-
     def self.all()
         sql = "SELECT * FROM transactions"
         transaction_data = SqlRunner.run(sql)
@@ -51,10 +53,14 @@ class Transaction
         return Merchant.find(@merchant_id)
     end
 
-    # def self.total()
-    #     transactions = Transaction.all()
-    #     return transactions.sum(0) {|transaction| transaction.amount.to_f}
-    # end
+    def budget()
+        return Budget.find(@budget_id)
+    end
+
+    def self.total()
+        transactions = Transaction.all()
+        return transactions.sum(0) {|transaction| transaction.amount.to_f}
+    end
 
     def delete()
         sql = "DELETE FROM transactions WHERE id = $1"
