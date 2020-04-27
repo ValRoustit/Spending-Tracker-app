@@ -10,11 +10,12 @@ class Transaction
         @amount = options['amount'].to_f
         @merchant_id = options['merchant_id'].to_i
         @tag_id = options['tag_id'].to_i
+        @budget_id = options['budget_id'].to_i
     end
 
     def save()
-        sql = "INSERT INTO transactions (name, amount, merchant_id, tag_id) VALUES ($1, $2, $3, $4) RETURNING id"
-        values = [@name, @amount, @merchant_id, @tag_id]
+        sql = "INSERT INTO transactions (name, amount, merchant_id, tag_id, budget_id) VALUES ($1, $2, $3, $4, $5) RETURNING id"
+        values = [@name, @amount, @merchant_id, @tag_id, @budget_id]
         transaction = SqlRunner.run(sql, values)[0]
         @id = transaction['id'].to_i
     end
@@ -28,10 +29,10 @@ class Transaction
 
     def update()
         sql = "UPDATE transactions SET 
-        (name, amount, merchant_id, tag_id)
+        (name, amount, merchant_id, tag_id, budget_id)
          = 
-        ($1, $2, $3, $4) WHERE id = $5"
-        values = [@name, @amount, @merchant_id, @tag_id, @id]
+        ($1, $2, $3, $4, $5) WHERE id = $6"
+        values = [@name, @amount, @merchant_id, @tag_id, @budget_id, @id]
         SqlRunner.run(sql, values)
     end
 
