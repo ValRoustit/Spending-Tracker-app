@@ -8,13 +8,13 @@ also_reload('../models/*')
 # show tags
 get '/spending-tracker/my-tags' do
     @tags = Tag.all
-    erb(:show_tags)
+    erb(:"tags/show_tags")
 end
 
 get '/spending-tracker/my-tags/:id' do
     @tag = Tag.find(params[:id])
     @transactions = @tag.transactions()
-    erb(:show_tag_data)
+    erb(:"tags/show_tag_data")
 end
 
 #----------------------------------------------------------------

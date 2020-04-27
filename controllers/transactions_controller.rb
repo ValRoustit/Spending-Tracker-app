@@ -10,7 +10,7 @@ also_reload('../models/*')
 get '/spending-tracker/my-spendings' do
     @transactions = Transaction.all
     @total = Transaction.total
-    erb(:show_transactions)
+    erb(:"transactions/show_transactions")
 end
 
 get '/spending-tracker/my-spendings/:id' do
@@ -18,14 +18,14 @@ get '/spending-tracker/my-spendings/:id' do
     @tags = Tag.all
     @budget = Buget.all
     @transaction = Transaction.find(params[:id])
-    erb(:show_transaction_data)
+    erb(:"transactions/show_transaction_data")
 end
 
 # new transaction
 get '/spending-tracker/new' do
     @merchants = Merchant.all
     @tags = Tag.all
-    erb(:new_transaction)
+    erb(:"transactions/new_transaction")
 end
 
 #----------------------------------------------------------------

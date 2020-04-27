@@ -7,19 +7,19 @@ also_reload('../models/*')
 # show budgets
 get '/spending-tracker/my-budgets' do
     @budgets = Budget.all
-    erb(:show_budgets)
+    erb(:"budgets/show_budgets")
 end
 
 # new budget
 get '/spending-tracker/my-budgets/new' do
-    erb(:new_budget)
+    erb(:"budgets/new_budget")
 end
 
 # show budget data
 get '/spending-tracker/my-budgets/:id' do
     @budget = Budget.find(params[:id])
     @transactions = @budget.transactions
-    erb(:show_budget_data)
+    erb(:"budgets/show_budget_data")
 end
 
 

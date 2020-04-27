@@ -7,13 +7,13 @@ also_reload('../models/*')
 # show merchants
 get '/spending-tracker/my-merchants' do
     @merchants = Merchant.all
-    erb(:show_merchants)
+    erb(:"merchants/show_merchants")
 end
 
 get '/spending-tracker/my-merchants/:id' do
     @merchant = Merchant.find(params[:id])
     @transactions = @merchant.transactions()
-    erb(:show_merchant_data)
+    erb(:"merchants/show_merchant_data")
 end
 
 #----------------------------------------------------------------
