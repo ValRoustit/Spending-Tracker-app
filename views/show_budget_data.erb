@@ -1,0 +1,34 @@
+<form method="post" action="/spending-tracker/my-budgets/<%= @budget.id %>">
+<h2><a href="/spending-tracker/my-budgets">My budgets</a></h2>
+<h3>Edit budget</h3>
+
+<label for="name"></label>
+<input
+    id="name"
+    type="text"
+    name="name"
+    value="<%= @budget.name %>"/>
+
+<table>
+    <thead>
+        <tr>
+        <th>Transactions</th>
+        <th>Amounts</th>
+        <th>Tags</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for transaction in @transactions %>
+            <tr>
+                <td><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %> </a></td>
+                <td>£<%= transaction.amount %> </td>
+                <td><%= transaction.tag.name %> </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+
+
+<input type="submit" id="update" name="update" value="Update">
+<input type="submit" id="delete" name="delete" value="Delete">
+</form>

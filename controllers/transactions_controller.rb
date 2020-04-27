@@ -3,6 +3,7 @@ require('sinatra/contrib/all')
 require_relative('../models/tag')
 require_relative('../models/merchant')
 require_relative('../models/transaction')
+require_relative('../models/budget')
 also_reload('../models/*')
 
 # show transactions
@@ -15,6 +16,7 @@ end
 get '/spending-tracker/my-spendings/:id' do
     @merchants = Merchant.all
     @tags = Tag.all
+    @budget = Buget.all
     @transaction = Transaction.find(params[:id])
     erb(:show_transaction_data)
 end
