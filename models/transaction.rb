@@ -41,9 +41,9 @@ class Transaction
         tag_id = params[:tag_id].to_i
 
         transactions = Transaction.all
-        transactions = transactions.find_all {|transaction| transaction.merchant_id == merchant_id} unless merchant_id == 0
-        transactions = transactions.find_all {|transaction| transaction.budget_id == budget_id} unless budget_id == 0
-        transactions = transactions.find_all {|transaction| transaction.tag_id == tag_id} unless tag_id == 0
+        transactions = transactions.find_all {|trans| trans.merchant_id == merchant_id} unless merchant_id == 0
+        transactions = transactions.find_all {|trans| trans.budget_id == budget_id} unless budget_id == 0
+        transactions = transactions.find_all {|trans| trans.tag_id == tag_id} unless tag_id == 0
 
         return transactions
 
