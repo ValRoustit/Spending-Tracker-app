@@ -21,12 +21,18 @@ merchant1.save()
 tag1 = Tag.new({'name' => 'clothes'})
 tag1.save()
 
-transaction1 = Transaction.new({'name'=>'shoes','amount'=>100,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id, 'budget_id'=>budget0.id})
+transaction1 = Transaction.new({
+    'name'=>'shoes',
+    'amount'=>100,
+    'merchant_id'=>merchant1.id,
+    'tag_id'=>tag1.id,
+    'budget_id'=>budget0.id,
+    'date'=>'2020-04-28'})
 transaction1.save()
-transaction1 = Transaction.new({'name'=>'shoes','amount'=>300,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id, 'budget_id'=>budget0.id})
-transaction1.save()
-transaction1 = Transaction.new({'name'=>'shoes','amount'=>200,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id, 'budget_id'=>budget0.id})
-transaction1.save()
+# transaction1 = Transaction.new({'name'=>'shoes','amount'=>300,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id, 'budget_id'=>budget0.id, 'date'=>'28.04.2020'})
+# transaction1.save()
+# transaction1 = Transaction.new({'name'=>'shoes','amount'=>200,'merchant_id'=>merchant1.id,'tag_id'=>tag1.id, 'budget_id'=>budget0.id, 'date'=>'28.04.2020'})
+# transaction1.save()
 
 binding.pry
 nil

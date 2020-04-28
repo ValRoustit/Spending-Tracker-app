@@ -12,7 +12,10 @@ class Budget
     end
 
     def save()
-        sql = "INSERT INTO budgets (name, amount, alert_limit) VALUES ($1, $2, $3) RETURNING id"
+        sql = "INSERT INTO budgets 
+        (name, amount, alert_limit) 
+        VALUES 
+        ($1, $2, $3) RETURNING id"
         values = [@name, @amount, @alert_limit]
         budget = SqlRunner.run(sql, values)[0]
         @id = budget['id'].to_i

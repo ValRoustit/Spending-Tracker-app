@@ -26,5 +26,6 @@ CREATE TABLE transactions (
   amount FLOAT,
   merchant_id INT REFERENCES merchants(id),
   tag_id INT REFERENCES tags(id),
-  budget_id INT REFERENCES budgets(id)
+  budget_id INT REFERENCES budgets(id),
+  date DATE
 );
