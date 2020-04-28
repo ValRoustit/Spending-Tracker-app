@@ -36,6 +36,17 @@
         <% end %>
     </select>
 
+    <label for="budget">budget:</label>
+    <select name="budget_id" id="budget-id">
+        <% for budget in @budgets %>
+            <% if budget.id == @transaction.budget_id %>
+                <option value=<%= budget.id %> selected><%= budget.name %></option>
+            <% else %>
+                <option value=<%= budget.id %>><%= budget.name %></option>
+            <% end %>
+        <% end %>
+    </select>
+
 
     <input type="submit" id="updete" name="update" value="Update">
     <input type="submit" id="delete" name="delete" value="Delete">

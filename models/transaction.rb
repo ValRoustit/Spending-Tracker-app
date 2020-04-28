@@ -2,7 +2,7 @@ require_relative('../db/sql_runner')
 
 class Transaction
     attr_reader :id
-    attr_accessor :name, :amount, :merchant_id, :tag_id
+    attr_accessor :name, :amount, :merchant_id, :tag_id, :budget_id
 
     def initialize( options )
         @id = options['id'].to_i if options['id']

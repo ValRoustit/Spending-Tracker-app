@@ -9,6 +9,7 @@
         <th>amount</th>
         <th>Merchant</th>
         <th>Tag</th>
+        <th>Budget</th>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
                 <td>£<%= transaction.amount %> </td>
                 <td><%= transaction.merchant.name %> </td>
                 <td><%= transaction.tag.name %> </td>
+                <td><%= transaction.budget.name %> </td>
             </tr>
         <% end %>
     </tbody>

@@ -16,7 +16,7 @@ end
 get '/spending-tracker/my-spendings/:id' do
     @merchants = Merchant.all
     @tags = Tag.all
-    @budget = Buget.all
+    @budgets = Budget.all
     @transaction = Transaction.find(params[:id])
     erb(:"transactions/show_transaction_data")
 end
@@ -25,6 +25,7 @@ end
 get '/spending-tracker/new' do
     @merchants = Merchant.all
     @tags = Tag.all
+    @budgets = Budget.all
     erb(:"transactions/new_transaction")
 end
 

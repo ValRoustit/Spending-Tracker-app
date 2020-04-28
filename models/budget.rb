@@ -44,6 +44,15 @@ class Budget
         return @amount - spent
     end
 
+    def alert()
+        limit = (@amount * @alert_limit)/100
+        reamain = remain()
+        status = remain - limit
+        return "OVER" if remain < 0
+        return "OK" if status > 0
+        return "UNDER" if status < 0
+    end
+
     def self.all()
         sql = "SELECT * FROM budgets"
         budget_data = SqlRunner.run(sql)
