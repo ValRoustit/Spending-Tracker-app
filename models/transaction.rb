@@ -32,7 +32,10 @@ class Transaction
     end
 
     def show_date()
-        sql = ""
+        sql = "SELECT TO_CHAR(date, 'dd/mm/yyyy') FROM transactions WHERE id = $1"
+        values = [@id]
+        result = SqlRunner.run(sql, values).first['to_char']
+        return result
     end
 
     def self.filter(params)
@@ -46,11 +49,6 @@ class Transaction
         transactions = transactions.find_all {|trans| trans.tag_id == tag_id} unless tag_id == 0
 
         return transactions
-
-        # sql = "SELECT * FROM transactions WHERE merchant_id = $1 AND budget_id = $2 AND tag_id = $3"
-        # values = [merchant_id, budget_id, tag_id]
-        # transaction_data = SqlRunner.run(sql, values)
-        # return Transaction.map_items(transaction_data)
     end
 
     def update()
