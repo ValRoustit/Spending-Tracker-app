@@ -5,7 +5,7 @@
 <h3>Filters:</h3>
 
 <label for="merchant">merchant:</label>
-<select name="merchant_id" id="merchant-id">
+<select name="merchant_id" id="merchant-id" required>
     <option value="0"></option>
     <% for merchant in @merchants %>
         <% if merchant.id == 1 %>
@@ -17,7 +17,7 @@
 </select>
 
 <label for="tag">tag:</label>
-<select name="tag_id" id="tag-id">
+<select name="tag_id" id="tag-id" required>
     <option value="0"></option>
     <% for tag in @tags %>
         <% if tag.id == 1 %>
@@ -29,7 +29,7 @@
 </select>
 
 <label for="budget">budget:</label>
-<select name="budget_id" id="budget-id">
+<select name="budget_id" id="budget-id" required>
     <option value="0"></option>
     <% for budget in @budgets %>
         <% if budget.id == 1 %>

@@ -40,10 +40,17 @@ class Transaction
         budget_id = params[:budget_id].to_i
         tag_id = params[:tag_id].to_i
 
-        sql = "SELECT * FROM transactions WHERE merchant_id = $1 AND budget_id = $2 AND tag_id = $3"
-        values = [merchant_id, budget_id, tag_id]
-        transaction_data = SqlRunner.run(sql, values)
-        return Transaction.map_items(transaction_data)
+        transactions = Transaction.all
+        transactions = transactions.find_all {|transaction| transaction.merchant_id == merchant_id} unless merchant_id == 0
+        transactions = transactions.find_all {|transaction| transaction.budget_id == budget_id} unless budget_id == 0
+        transactions = transactions.find_all {|transaction| transaction.tag_id == tag_id} unless tag_id == 0
+
+        return transactions
+
+        # sql = "SELECT * FROM transactions WHERE merchant_id = $1 AND budget_id = $2 AND tag_id = $3"
+        # values = [merchant_id, budget_id, tag_id]
+        # transaction_data = SqlRunner.run(sql, values)
+        # return Transaction.map_items(transaction_data)
     end
 
     def update()
