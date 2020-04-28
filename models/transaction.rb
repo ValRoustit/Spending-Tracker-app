@@ -35,9 +35,16 @@ class Transaction
         sql = ""
     end
 
-    # def self.find_by_date(date)
-        
-    # end
+    def self.filter(params)
+        merchant_id = params[:merchant_id].to_i
+        budget_id = params[:budget_id].to_i
+        tag_id = params[:tag_id].to_i
+
+        sql = "SELECT * FROM transactions WHERE merchant_id = $1 AND budget_id = $2 AND tag_id = $3"
+        values = [merchant_id, budget_id, tag_id]
+        transaction_data = SqlRunner.run(sql, values)
+        return Transaction.map_items(transaction_data)
+    end
 
     def update()
         sql = "UPDATE transactions SET 

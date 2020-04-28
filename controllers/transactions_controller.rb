@@ -8,6 +8,10 @@ also_reload('../models/*')
 
 # show transactions
 get '/spending-tracker/my-spendings' do
+    @merchants = Merchant.all
+    @budgets = Budget.all
+    @tags = Tag.all
+
     @transactions = Transaction.all
     @total = Transaction.total
     erb(:"transactions/show_transactions")
@@ -30,6 +34,18 @@ get '/spending-tracker/new' do
 end
 
 #----------------------------------------------------------------
+
+# filter
+post '/spending-tracker/my-spendings' do
+    @merchants = Merchant.all
+    @budgets = Budget.all
+    @tags = Tag.all
+
+    @transactions = Transaction.filter(params)
+    @total = @transactions.sum(0) {|transaction| transaction.amount.to_f}
+    erb(:"transactions/show_transactions")
+    # redirect to '/spending-tracker/my-spendings'
+end
 
 # create transaction
 post '/spending-tracker/new' do

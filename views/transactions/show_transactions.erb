@@ -1,5 +1,47 @@
-<h3>My spendings</h3>
+<h3><a href='/spending-tracker/my-spendings'>My spendings</h3>
 <h3><a href='/spending-tracker/new'>New spending</a></h3>
+
+<form method="post" action="/spending-tracker/my-spendings">
+<h3>Filters:</h3>
+
+<label for="merchant">merchant:</label>
+<select name="merchant_id" id="merchant-id">
+    <option value="0"></option>
+    <% for merchant in @merchants %>
+        <% if merchant.id == 1 %>
+            <option value=<%= merchant.id %>>none</option>
+        <% else %>
+            <option value=<%= merchant.id %>><%= merchant.name %></option>
+        <% end %>
+    <% end %>
+</select>
+
+<label for="tag">tag:</label>
+<select name="tag_id" id="tag-id">
+    <option value="0"></option>
+    <% for tag in @tags %>
+        <% if tag.id == 1 %>
+            <option value=<%= tag.id %>>none</option>
+        <% else %>
+            <option value=<%= tag.id %>><%= tag.name %></option>
+        <% end %>
+    <% end %>
+</select>
+
+<label for="budget">budget:</label>
+<select name="budget_id" id="budget-id">
+    <option value="0"></option>
+    <% for budget in @budgets %>
+        <% if budget.id == 1 %>
+            <option value=<%= budget.id %>>none</option>
+        <% else%>
+            <option value=<%= budget.id %>><%= budget.name %></option>
+        <% end %>
+    <% end %>
+</select>
+
+<input type="submit" id="filter" name="filter" value="Filter">
+</form>
 
 <p>Total spent: £<%= @total %></p>
 <table>
