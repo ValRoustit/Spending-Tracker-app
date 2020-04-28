@@ -4,13 +4,22 @@
     <input
         id="name"
         type="text"
-        name="name"/>
+        name="name"
+        required/>
+
+    <label for="date">date:</label>
+    <input 
+        id="date"
+        type="date"  
+        name="date"
+        required/>
 
     <label for="amount">amount: £</label>
     <input
         id="amount"
         type="float"
-        name="amount"/>
+        name="amount"
+        required/>
 
     <label for="merchant">merchant:</label>
     <select name="merchant_id" id="merchant-id">
@@ -29,7 +38,11 @@
     <label for="budget">budget:</label>
     <select name="budget_id" id="budget-id">
         <% for budget in @budgets %>
-            <option value="<%= budget.id %>"><%= budget.name %>: £<%= budget.remain %></option>
+            <% if budget.id == 1 %>
+                <option value=<%= budget.id %> selected>none</option>
+            <% else %>
+                <option value="<%= budget.id %>"><%= budget.name %>: £<%= budget.remain %></option>
+            <% end %>
         <% end %>
     </select>
 

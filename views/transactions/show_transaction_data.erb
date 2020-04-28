@@ -5,14 +5,24 @@
         id="name"
         type="text"
         name="name"
-        value="<%= @transaction.name %>"/>
+        value="<%= @transaction.name %>"
+        required/>
+    
+    <label for="date">date:</label>
+    <input 
+        id="date"
+        type="date"  
+        name="date"
+        value="<%= @transaction.date %>"
+        required/>
 
     <label for="amount">amount: £</label>
     <input
         id="amount"
         type="float"
         name="amount"
-        value="<%= @transaction.amount %>"/>
+        value="<%= @transaction.amount %>"
+        required/>
 
     <label for="merchant">merchant:</label>
     <select name="merchant_id" id="merchant-id">

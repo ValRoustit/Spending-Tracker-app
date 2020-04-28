@@ -31,6 +31,10 @@ class Transaction
         return Transaction.new(result)
     end
 
+    def show_date()
+        sql = ""
+    end
+
     # def self.find_by_date(date)
         
     # end

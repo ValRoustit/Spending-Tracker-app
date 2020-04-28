@@ -6,7 +6,8 @@
     <thead>
         <tr>
         <th>Transaction</th>
-        <th>amount</th>
+        <th>Date</th>
+        <th>Amount</th>
         <th>Merchant</th>
         <th>Tag</th>
         <th>Budget</th>
@@ -16,6 +17,7 @@
         <% for transaction in @transactions %>
             <tr>
                 <td><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %> </a></td>
+                <td type="date"><%= transaction.date %></td>
                 <td>£<%= transaction.amount %> </td>
                 <td><%= transaction.merchant.name %> </td>
                 <td><%= transaction.tag.name %> </td>
