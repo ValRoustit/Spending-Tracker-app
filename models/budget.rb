@@ -8,7 +8,7 @@ class Budget
         @id = options['id'].to_i if options['id']
         @name = options['name']
         @amount = options['amount'].to_f
-        @alert_limit = options[:alert_limit].to_i
+        @alert_limit = options['alert_limit'].to_i
     end
 
     def save()
@@ -39,18 +39,20 @@ class Budget
     end
 
     def remain()
+        return nil if @id == 1
         transactions = transactions()
         spent = transactions.sum(0) {|transaction| transaction.amount.to_f}
         return @amount - spent
     end
 
     def alert()
-        limit = (@amount * @alert_limit)/100
-        reamain = remain()
+        return nil if @id == 1
+        limit = (@amount*@alert_limit)/100
+        remain = remain()
         status = remain - limit
-        return "OVER" if remain < 0
-        return "OK" if status > 0
-        return "UNDER" if status < 0
+        return "#e6b0c5" if remain < 0
+        return "#b0e0e6" if status >= 0
+        return "#e6d1b0" if status < 0
     end
 
     def self.all()

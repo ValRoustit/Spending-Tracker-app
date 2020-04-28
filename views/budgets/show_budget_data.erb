@@ -2,12 +2,33 @@
 <h2><a href="/spending-tracker/my-budgets">My budgets</a></h2>
 <h3>Edit budget</h3>
 
-<label for="name"></label>
+<label for="name">name: </label>
 <input
     id="name"
     type="text"
     name="name"
     value="<%= @budget.name %>"/>
+
+<label for="amount">total: £</label>
+<input
+    id="amount"
+    type="float"
+    name="amount"
+    value="<%= @budget.amount%>"/>
+
+<label for="remain">remain: £</label>
+<input
+    id="remain"
+    type="float"
+    name="remain"
+    value="<%= @budget.remain%>"/>
+
+<label for="alert-under">Alert:</label> 
+<select name="alert_limit" id="alert_limimt" selected="<%= @budget.alert_limit%>">
+    <option value="50">50% left</option>
+    <option value="25">25% lefy</option>
+    <option value="10">10% left</option>
+</select>
 
 <table>
     <thead>

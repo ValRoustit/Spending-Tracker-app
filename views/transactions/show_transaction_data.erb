@@ -39,10 +39,12 @@
     <label for="budget">budget:</label>
     <select name="budget_id" id="budget-id">
         <% for budget in @budgets %>
-            <% if budget.id == @transaction.budget_id %>
-                <option value=<%= budget.id %> selected><%= budget.name %></option>
+            <% if budget.id == @transaction.budget_id && budget.id != 1 %>
+                <option value=<%= budget.id %> selected><%= budget.name %>: £<%= budget.remain %></option>
+            <% elsif budget.id == 1 %>
+                <option value=<%= budget.id %> selected>none</option>
             <% else %>
-                <option value=<%= budget.id %>><%= budget.name %></option>
+                <option value=<%= budget.id %>><%= budget.name %>: £<%= budget.remain %></option>
             <% end %>
         <% end %>
     </select>

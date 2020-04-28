@@ -19,7 +19,9 @@
                 <td>£<%= transaction.amount %> </td>
                 <td><%= transaction.merchant.name %> </td>
                 <td><%= transaction.tag.name %> </td>
-                <td><%= transaction.budget.name %> </td>
+                <td style="background-color:<%= transaction.budget.alert%>;">
+                    <a href="/spending-tracker/my-budgets/<%= transaction.budget_id%>"><%= transaction.budget.name %> </a>
+                </td>
             </tr>
         <% end %>
     </tbody>

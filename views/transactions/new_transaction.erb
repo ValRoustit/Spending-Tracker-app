@@ -29,7 +29,7 @@
     <label for="budget">budget:</label>
     <select name="budget_id" id="budget-id">
         <% for budget in @budgets %>
-            <option value="<%= budget.id %>"><%= budget.name %></option>
+            <option value="<%= budget.id %>"><%= budget.name %>: £<%= budget.remain %></option>
         <% end %>
     </select>
 
