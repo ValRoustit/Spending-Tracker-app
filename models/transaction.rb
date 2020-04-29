@@ -88,6 +88,10 @@ class Transaction
     end
 
     def update()
+        @merchant_id = id_exist(@merchant_id)
+        @budget_id = id_exist(@budget_id)
+        @tag_id = id_exist(@tag_id)
+
         sql = "UPDATE transactions SET 
         (name, amount, merchant_id, tag_id, budget_id, date)
          = 

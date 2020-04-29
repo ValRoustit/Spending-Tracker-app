@@ -17,12 +17,13 @@
         value="<%= @transaction.date %>"
         required/>
 
-    <label for="amount">amount: £</label>
+    <label for="amount"></label>
     <input
         id="amount"
         type="float"
         name="amount"
         value="<%= @transaction.amount %>"
+        placeholder="amount: £"
         required/>
 
     <label for="merchant">merchant:</label>
@@ -34,6 +35,7 @@
                 <option value=<%= merchant.id %>><%= merchant.name %></option>
             <% end %>
         <% end %>
+        <option value="0">none</option>
     </select>
 
     <label for="tag">tag:</label>
@@ -45,6 +47,7 @@
                 <option value=<%= tag.id %>><%= tag.name %></option>
             <% end %>
         <% end %>
+        <option value="0">none</option>
     </select>
 
     <label for="budget">budget:</label>
@@ -58,6 +61,7 @@
                 <option value=<%= budget.id %>><%= budget.name %>: £<%= budget.remain %></option>
             <% end %>
         <% end %>
+        <option value="0">none</option>
     </select>
 
 
