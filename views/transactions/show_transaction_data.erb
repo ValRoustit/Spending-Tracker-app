@@ -31,39 +31,37 @@
     <label for="merchant">merchant:</label>
     <select name="merchant_id" id="merchant-id">
         <% for merchant in @merchants %>
-            <% if merchant.id == @transaction.merchant_id %>
-                <option value=<%= merchant.id %> selected><%= merchant.name %></option>
+            <% if merchant.id == @transaction.merchant_id.to_i %>
+                <option value="<%= merchant.id %>" selected><%= merchant.name %></option>
             <% else %>
-                <option value=<%= merchant.id %>><%= merchant.name %></option>
+                <option value="<%= merchant.id %>"><%= merchant.name %></option>
             <% end %>
         <% end %>
-        <option value="0">none</option>
+        <option value="0" <%= 'selected' if @transaction.merchant_id == nil %>>-</option>
     </select>
 
     <label for="tag">tag:</label>
     <select name="tag_id" id="tag-id">
         <% for tag in @tags %>
-            <% if tag.id == @transaction.tag_id %>
-                <option value=<%= tag.id %> selected><%= tag.name %></option>
+            <% if tag.id == @transaction.tag_id.to_i %>
+                <option value=<%= tag.id%> selected><%= tag.name %></option>
             <% else %>
                 <option value=<%= tag.id %>><%= tag.name %></option>
             <% end %>
         <% end %>
-        <option value="0">none</option>
+        <option value="0" <%= 'selected' if @transaction.tag_id == nil %>>-</option>
     </select>
 
     <label for="budget">budget:</label>
     <select name="budget_id" id="budget-id">
         <% for budget in @budgets %>
-            <% if budget.id == @transaction.budget_id && budget.id != 1 %>
+            <% if budget.id == @transaction.budget_id.to_i %>
                 <option value=<%= budget.id %> selected><%= budget.name %>: £<%= budget.remain %></option>
-            <% elsif budget.id == 1 %>
-                <option value=<%= budget.id %> selected>none</option>
             <% else %>
                 <option value=<%= budget.id %>><%= budget.name %>: £<%= budget.remain %></option>
             <% end %>
         <% end %>
-        <option value="0">none</option>
+        <option value="0" <%= 'selected' if @transaction.budget_id == nil %>>-</option>
     </select>
 
 

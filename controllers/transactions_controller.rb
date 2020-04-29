@@ -44,7 +44,6 @@ post '/spending-tracker/my-spendings' do
     @transactions = Transaction.filter(params)
     @total = @transactions.sum(0) {|transaction| transaction.amount.to_f}
     erb(:"transactions/show_transactions")
-    # redirect to '/spending-tracker/my-spendings'
 end
 
 # create transaction
@@ -55,7 +54,9 @@ end
 
 # edit transaction
 post '/spending-tracker/my-spendings/:id' do
+    p params
     transaction = Transaction.new(params)
+    p transaction
     transaction.update if params[:update] == "Update"
     transaction.delete if params[:delete] == "Delete"
     redirect to '/spending-tracker/my-spendings'

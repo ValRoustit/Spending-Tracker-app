@@ -29,7 +29,8 @@ class Transaction
     end
 
     def id_exist(id)
-        return nil if id == 0
+        return nil if id.to_i == 0
+        return id.to_i
     end
 
     def self.find(id)
@@ -52,9 +53,7 @@ class Transaction
         tag_id = params[:tag_id].to_i
 
         sql = "SELECT * FROM transactions"
-        data = []
-        data[0] = sql
-        data[1] = false
+        data = [sql, false]
         
         data = filter_logic(data, "merchant_id ", merchant_id)
         data = filter_logic(data, "budget_id ", budget_id)
@@ -89,7 +88,7 @@ class Transaction
     end
 
     def self.all()
-        sql = "SELECT * FROM transactions"
+        sql = "SELECT * FROM transactions ORDER BY date DESC"
         transaction_data = SqlRunner.run(sql)
         return Transaction.map_items(transaction_data)
     end

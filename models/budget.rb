@@ -47,10 +47,6 @@ class Budget
         return @amount - spent
     end
 
-    # def banane()
-    #     sql = "SELECT budgets.id, budgets.name, SUM(transactions.amount) FROM budgets INNER JOIN transactions ON budgets.id = transactions.budget_id GROUP BY budgets.id"
-    # end
-
     def alert()
         limit = (@amount * @alert_limit)/100
         remain = remain()
@@ -64,6 +60,10 @@ class Budget
         sql = "SELECT * FROM budgets"
         budget_data = SqlRunner.run(sql)
         return map_items(budget_data)
+    end
+
+    def self.all_remains()
+        sql = ""
     end
 
     def delete()
