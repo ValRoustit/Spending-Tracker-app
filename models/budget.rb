@@ -42,6 +42,7 @@ class Budget
     end
 
     def remain()
+        # sql = "SELECT "
         transactions = transactions()
         spent = transactions.sum(0) {|transaction| transaction.amount.to_f}
         return @amount - spent
