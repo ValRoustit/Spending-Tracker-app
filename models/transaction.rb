@@ -51,40 +51,28 @@ class Transaction
         budget_id = params[:budget_id].to_i
         tag_id = params[:tag_id].to_i
 
-        sql = "SELECT * FROM transactions "
+        sql = "SELECT * FROM transactions"
         data = []
         data[0] = sql
         data[1] = false
         
-        data = filter_logic(data[0], "merchant_id ", merchant_id, data[1])
-        data = filter_logic(data[0], "budget_id ", budget_id, data[1])
-        data = filter_logic(data[0], "tag_id ", tag_id, data[1])
-
-        # if merchant_id != -1
-        #     sql += " WHERE merchant_id = #{merchant_id}" if merchant_id != 0
-        #     sql += " WHERE merchant_id = NULL" if merchant_id == 0
-        # end
+        data = filter_logic(data, "merchant_id ", merchant_id)
+        data = filter_logic(data, "budget_id ", budget_id)
+        data = filter_logic(data, "tag_id ", tag_id)
 
         result = SqlRunner.run(data[0])
         return Transaction.map_items(result)
-
-        # transactions = Transaction.all
-        # transactions = transactions.find_all {|trans| trans.merchant_id == merchant_id} unless merchant_id == 0
-        # transactions = transactions.find_all {|trans| trans.budget_id == budget_id} unless budget_id == 0
-        # transactions = transactions.find_all {|trans| trans.tag_id == tag_id} unless tag_id == 0
-
-        # return transactions
     end
 
-    def self.filter_logic(sql, string, id, bool)
-        logic = "AND " if bool
-        logic = "WHERE " if !bool
+    def self.filter_logic(data, string, id)
+        logic = " AND " if data[1]
+        logic = " WHERE " if !data[1]
         if id != -1 
-            sql += logic + string + "= #{id}" if id != 0
-            sql += logic + string + "= NULL" if id == 0
-            bool = true
+            data[0] += logic + string + "= #{id}" if id != 0
+            data[0] += logic + string + "IS NULL" if id == 0
+            data[1] = true
         end
-        return [sql, bool]
+        return data
     end
 
     def update()

@@ -1,5 +1,38 @@
-<h3><a href='/spending-tracker/my-spendings'>My spendings</h3>
 <h3><a href='/spending-tracker/new'>New spending</a></h3>
+
+
+<form method="post" action="/spending-tracker/my-spendings">
+
+<label for="merchant"></label>
+<select name="merchant_id" id="merchant-id">
+    <option value="-1">all merchants</option>
+    <option value="0">none</option>
+    <% for merchant in @merchants %>
+        <option value=<%= merchant.id %>><%= merchant.name %></option>
+    <% end %>
+</select>
+
+<label for="tag"></label>
+<select name="tag_id" id="tag-id">
+    <option value="-1">all tags</option>
+    <option value="0">none</option>
+    <% for tag in @tags %>
+        <option value=<%= tag.id %>><%= tag.name %></option>
+    <% end %>
+</select>
+
+<label for="budget"></label>
+<select name="budget_id" id="budget-id">
+    <option value="-1">all budgets</option>
+    <option value="0">none</option>
+    <% for budget in @budgets %>
+        <option value=<%= budget.id %>><%= budget.name %></option>
+    <% end %>
+</select>
+
+<input type="submit" id="filter" name="filter" value="Filter">
+</form>
+
 
 
 <p>Total spent: £<%= @total %></p>
@@ -45,36 +78,3 @@
         <% end %>
     </tbody>
 </table>
-
-
-<form method="post" action="/spending-tracker/my-spendings">
-
-<label for="merchant"></label>
-<select name="merchant_id" id="merchant-id">
-    <option value="-1">all merchants</option>
-    <option value="0">none</option>
-    <% for merchant in @merchants %>
-        <option value=<%= merchant.id %>><%= merchant.name %></option>
-    <% end %>
-</select>
-
-<label for="tag"></label>
-<select name="tag_id" id="tag-id">
-    <option value="-1">all tags</option>
-    <option value="0">none</option>
-    <% for tag in @tags %>
-        <option value=<%= tag.id %>><%= tag.name %></option>
-    <% end %>
-</select>
-
-<label for="budget"></label>
-<select name="budget_id" id="budget-id">
-    <option value="-1">all budgets</option>
-    <option value="0">none</option>
-    <% for budget in @budgets %>
-        <option value=<%= budget.id %>><%= budget.name %></option>
-    <% end %>
-</select>
-
-<input type="submit" id="filter" name="filter" value="Filter">
-</form>

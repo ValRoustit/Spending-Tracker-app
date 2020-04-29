@@ -1,3 +1,5 @@
+<h2><a href="/spending-tracker/my-spendings">my spendings</a></h2>
+
 <form method="post" action="/spending-tracker/my-spendings/<%= @transaction.id %>">
 
     <label for="name">name:</label>
@@ -17,13 +19,13 @@
         value="<%= @transaction.date %>"
         required/>
 
-    <label for="amount"></label>
+    <label for="amount">amount: £</label>
     <input
         id="amount"
         type="float"
         name="amount"
         value="<%= @transaction.amount %>"
-        placeholder="amount: £"
+        placeholder="add amount"
         required/>
 
     <label for="merchant">merchant:</label>
