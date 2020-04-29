@@ -35,7 +35,7 @@ class Budget
     end
 
     def transactions()
-        sql = "SELECT * FROM transactions WHERE budget_id = $1"
+        sql = "SELECT * FROM transactions WHERE budget_id = $1 ORDER BY date DESC"
         values = [@id]
         transactions_data = SqlRunner.run(sql, values)
         return Transaction.map_items(transactions_data)

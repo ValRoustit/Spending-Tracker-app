@@ -56,9 +56,9 @@
     <select name="budget_id" id="budget-id">
         <% for budget in @budgets %>
             <% if budget.id == @transaction.budget_id.to_i %>
-                <option value=<%= budget.id %> selected><%= budget.name %>: £<%= budget.remain %></option>
+                <option value=<%= budget.id %> selected><%= budget.name %>: £<%= budget.remain %> left</option>
             <% else %>
-                <option value=<%= budget.id %>><%= budget.name %>: £<%= budget.remain %></option>
+                <option value=<%= budget.id %>><%= budget.name %>: £<%= budget.remain %> left</option>
             <% end %>
         <% end %>
         <option value="0" <%= 'selected' if @transaction.budget_id == nil %>>-</option>
