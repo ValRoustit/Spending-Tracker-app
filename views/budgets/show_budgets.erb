@@ -1,9 +1,7 @@
 
 <h3>My budgets</h3>
-<p><a href="/spending-tracker/my-budgets/new">Add Budget</a></p>
+<p><a href="/spending-tracker/my-budgets/new">Create Budget</a></p>
 
 <% for budget in @budgets %>
-    <% if budget.id != 1 %>
         <p><a href="/spending-tracker/my-budgets/<%= budget.id %>"><%= budget.name %></a></p>
-    <% end %>
 <% end %>

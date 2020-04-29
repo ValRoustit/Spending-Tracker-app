@@ -1,45 +1,47 @@
 <form method='post' action='/spending-tracker/new'>
 
-    <label for="name">name:</label>
+    <label for="name"></label>
     <input
         id="name"
         type="text"
         name="name"
-        required/>
+        required
+        placeholder="name"/>
 
-    <label for="date">date:</label>
+    <label for="date"></label>
     <input 
         id="date"
         type="date"  
         name="date"
-        value="today"/>
+        required/>
 
-    <label for="amount">amount: £</label>
+    <label for="amount"></label>
     <input
         id="amount"
         type="float"
         name="amount"
-        required/>
+        required
+        placeholder="amount: £"/>
 
-    <label for="merchant">merchant:</label>
-    <select name="merchant_id" id="merchant-id" placeholder="add merchant">
-        <option value='none'></option>
+    <label for="merchant"></label>
+    <select name="merchant_id" id="merchant-id">
+        <option value="0">select merchant</option>
         <% for merchant in @merchants %>
             <option value="<%= merchant.id %>"><%= merchant.name %></option>
         <% end %>
     </select>
 
-    <label for="tag">tag:</label>
+    <label for="tag"></label>
     <select name="tag_id" id="tag-id" placeholder="add tag">
-        <option value="none"></option>
+        <option value="0">select tag</option>
         <% for tag in @tags %>
             <option value="<%= tag.id %>"><%= tag.name %></option>
         <% end %>
     </select>
 
-    <label for="budget">budget:</label>
+    <label for="budget"></label>
     <select name="budget_id" id="budget-id" placeholder="add budget">
-        <option value="none"></option>
+        <option value="0">select budget</option>
         <% for budget in @budgets %>
             <option value="<%= budget.id %>"><%= budget.name %>: £<%= budget.remain %></option>
         <% end %>

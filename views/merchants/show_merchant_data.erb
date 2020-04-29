@@ -22,7 +22,13 @@
             <tr>
                 <td><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %> </a></td>
                 <td>£<%= transaction.amount %> </td>
-                <td><%= transaction.tag.name %> </td>
+                <td>
+                    <% if transaction.tag_id == nil %>
+                        none
+                    <% else %>
+                        <%= transaction.tag.name %>
+                    <% end %>
+                </td>
             </tr>
         <% end %>
     </tbody>

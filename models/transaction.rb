@@ -15,6 +15,10 @@ class Transaction
     end
 
     def save()
+        @merchant_id = id_exist(@merchant_id)
+        @budget_id = id_exist(@budget_id)
+        @tag_id = id_exist(@tag_id)
+
         sql = "INSERT INTO transactions 
         (name, amount, merchant_id, tag_id, budget_id, date)
         VALUES
@@ -22,6 +26,10 @@ class Transaction
         values = [@name, @amount, @merchant_id, @tag_id, @budget_id, @date]
         transaction = SqlRunner.run(sql, values)[0]
         @id = transaction['id'].to_i
+    end
+
+    def id_exist(id)
+        return nil if id == 0
     end
 
     def self.find(id)
@@ -43,21 +51,21 @@ class Transaction
         budget_id = params[:budget_id].to_i
         tag_id = params[:tag_id].to_i
 
-        sql = "SELECT * FROM transactions"
-        values = []
-        if merchant_id != 0
-            sql += " WHERE merchant_id = $1"
-            values[0] = merchant_id
-        end
-        if budget_id != 0
-            sql += " WHERE budget_id = $2"
-            values[1] = budget_id
-        end
-        if tag_id != 0
-            sql += " WHERE tag_id = $3"
-            values[2] = tag_id
-        end
-        result = SqlRunner.run(sql, values)
+        sql = "SELECT * FROM transactions "
+        data = []
+        data[0] = sql
+        data[1] = false
+        
+        data = filter_logic(data[0], "merchant_id ", merchant_id, data[1])
+        data = filter_logic(data[0], "budget_id ", budget_id, data[1])
+        data = filter_logic(data[0], "tag_id ", tag_id, data[1])
+
+        # if merchant_id != -1
+        #     sql += " WHERE merchant_id = #{merchant_id}" if merchant_id != 0
+        #     sql += " WHERE merchant_id = NULL" if merchant_id == 0
+        # end
+
+        result = SqlRunner.run(data[0])
         return Transaction.map_items(result)
 
         # transactions = Transaction.all
@@ -66,6 +74,17 @@ class Transaction
         # transactions = transactions.find_all {|trans| trans.tag_id == tag_id} unless tag_id == 0
 
         # return transactions
+    end
+
+    def self.filter_logic(sql, string, id, bool)
+        logic = "AND " if bool
+        logic = "WHERE " if !bool
+        if id != -1 
+            sql += logic + string + "= #{id}" if id != 0
+            sql += logic + string + "= NULL" if id == 0
+            bool = true
+        end
+        return [sql, bool]
     end
 
     def update()

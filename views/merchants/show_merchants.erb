@@ -7,13 +7,12 @@
     id="name"
     type="text"
     name="name"
-    value="..."/>
+    value=""
+    placeholder="add maerchant"/>
 
 
 <% for merchant in @merchants %>
-    <% if merchant.id != 1 %>
-        <p><a href="/spending-tracker/my-merchants/<%= merchant.id %>"><%= merchant.name %></a></p>
-    <% end %>
+    <p><a href="/spending-tracker/my-merchants/<%= merchant.id %>"><%= merchant.name %></a></p>
 <% end %>
 
 <input type="submit" id="new" name="new" value="New">

@@ -42,7 +42,6 @@ class Budget
     end
 
     def remain()
-        return nil if @id == 1
         transactions = transactions()
         spent = transactions.sum(0) {|transaction| transaction.amount.to_f}
         return @amount - spent
@@ -53,11 +52,10 @@ class Budget
     # end
 
     def alert()
-        return nil if @id == 1
-        limit = (@amount*@alert_limit)/100
+        limit = (@amount * @alert_limit)/100
         remain = remain()
         status = remain - limit
-        return "#e6b0c5" if remain < 0
+        return "#e6b0c5" if remain < 0 unless @alert_limit == 0
         return "#b0e0e6" if status >= 0
         return "#e6d1b0" if status < 0
     end
