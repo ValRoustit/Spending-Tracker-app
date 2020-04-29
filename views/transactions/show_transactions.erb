@@ -20,11 +20,27 @@
                 <td><a href="/spending-tracker/my-spendings/<%= transaction.id%>"><%= transaction.name %> </a></td>
                 <td><time datetime="<%= transaction.date %>"><%= transaction.show_date %></time></td>
                 <td>£<%= transaction.amount %> </td>
-                <td><%= transaction.merchant.name %> </td>
-                <td><%= transaction.tag.name %> </td>
-                <td style="background-color:<%= transaction.budget.alert%>;">
-                    <a href="/spending-tracker/my-budgets/<%= transaction.budget_id%>"><%= transaction.budget.name %> </a>
+                <td>
+                    <% if transaction.merchant_id == nil %>
+                        none
+                    <% else %>
+                        <%= transaction.merchant.name %>
+                    <% end %>
                 </td>
+                <td>
+                    <% if transaction.tag_id == nil %>
+                        none
+                    <% else %>
+                        <%= transaction.tag.name %>
+                    <% end %>
+                </td>
+                <% if transaction.budget_id == nil %>
+                    <td>none</td>
+                <% else %>
+                    <td style="background-color:<%= transaction.budget.alert%>;">
+                        <a href="/spending-tracker/my-budgets/<%= transaction.budget_id%>"><%= transaction.budget.name %></a>
+                    </td>
+                <% end %>
             </tr>
         <% end %>
     </tbody>
@@ -34,38 +50,29 @@
 <form method="post" action="/spending-tracker/my-spendings">
 
 <label for="merchant"></label>
-<select name="merchant_id" id="merchant-id" required>
-    <option value="0">merchants</option>
+<select name="merchant_id" id="merchant-id">
+    <option value="all">merchants</option>
+    <option value="none">none</option>
     <% for merchant in @merchants %>
-        <% if merchant.id == 1 %>
-            <option value=<%= merchant.id %>>none</option>
-        <% else %>
-            <option value=<%= merchant.id %>><%= merchant.name %></option>
-        <% end %>
+        <option value=<%= merchant.id %>><%= merchant.name %></option>
     <% end %>
 </select>
 
 <label for="tag"></label>
-<select name="tag_id" id="tag-id" required>
-    <option value="0">tags</option>
+<select name="tag_id" id="tag-id">
+    <option value="all">tags</option>
+    <option value="none">none</option>
     <% for tag in @tags %>
-        <% if tag.id == 1 %>
-            <option value=<%= tag.id %>>none</option>
-        <% else %>
-            <option value=<%= tag.id %>><%= tag.name %></option>
-        <% end %>
+        <option value=<%= tag.id %>><%= tag.name %></option>
     <% end %>
 </select>
 
 <label for="budget"></label>
-<select name="budget_id" id="budget-id" required>
-    <option value="0">budgets</option>
+<select name="budget_id" id="budget-id">
+    <option value="all">budgets</option>
+    <option value="none">none</option>
     <% for budget in @budgets %>
-        <% if budget.id == 1 %>
-            <option value=<%= budget.id %>>none</option>
-        <% else%>
-            <option value=<%= budget.id %>><%= budget.name %></option>
-        <% end %>
+        <option value=<%= budget.id %>><%= budget.name %></option>
     <% end %>
 </select>
 

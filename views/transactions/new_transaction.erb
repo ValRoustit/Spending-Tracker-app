@@ -12,7 +12,7 @@
         id="date"
         type="date"  
         name="date"
-        required/>
+        value="today"/>
 
     <label for="amount">amount: £</label>
     <input
@@ -22,27 +22,26 @@
         required/>
 
     <label for="merchant">merchant:</label>
-    <select name="merchant_id" id="merchant-id">
+    <select name="merchant_id" id="merchant-id" placeholder="add merchant">
+        <option value='none'></option>
         <% for merchant in @merchants %>
             <option value="<%= merchant.id %>"><%= merchant.name %></option>
         <% end %>
     </select>
 
     <label for="tag">tag:</label>
-    <select name="tag_id" id="tag-id">
+    <select name="tag_id" id="tag-id" placeholder="add tag">
+        <option value="none"></option>
         <% for tag in @tags %>
             <option value="<%= tag.id %>"><%= tag.name %></option>
         <% end %>
     </select>
 
     <label for="budget">budget:</label>
-    <select name="budget_id" id="budget-id">
+    <select name="budget_id" id="budget-id" placeholder="add budget">
+        <option value="none"></option>
         <% for budget in @budgets %>
-            <% if budget.id == 1 %>
-                <option value=<%= budget.id %> selected>none</option>
-            <% else %>
-                <option value="<%= budget.id %>"><%= budget.name %>: £<%= budget.remain %></option>
-            <% end %>
+            <option value="<%= budget.id %>"><%= budget.name %>: £<%= budget.remain %></option>
         <% end %>
     </select>
 

@@ -44,12 +44,6 @@ class Tag
     end
 
     def delete()
-        return nil if @id == 1
-        transactions = self.transactions()
-        transactions.each do |transaction|
-            transaction.tag_id = 1
-            transaction.update()
-        end
         sql = "DELETE FROM tags WHERE id = $1"
         values = [@id]
         SqlRunner.run(sql, values)

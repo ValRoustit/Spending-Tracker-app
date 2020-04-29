@@ -44,14 +44,7 @@ class Merchant
     end
 
     def delete()
-        return nil if @id == 1
-        transactions = self.transactions()
-        transactions.each do |transaction|
-            transaction.merchant_id = 1
-            transaction.update()
-        end
         sql = "DELETE FROM merchants WHERE id = $1"
-        values = [@id]
         SqlRunner.run(sql, values)
     end
 

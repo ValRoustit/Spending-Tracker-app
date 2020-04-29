@@ -48,6 +48,10 @@ class Budget
         return @amount - spent
     end
 
+    # def banane()
+    #     sql = "SELECT budgets.id, budgets.name, SUM(transactions.amount) FROM budgets INNER JOIN transactions ON budgets.id = transactions.budget_id GROUP BY budgets.id"
+    # end
+
     def alert()
         return nil if @id == 1
         limit = (@amount*@alert_limit)/100
@@ -65,12 +69,6 @@ class Budget
     end
 
     def delete()
-        return nil if @id == 1
-        transactions = self.transactions()
-        transactions.each do |transaction|
-            transaction.budget_id = 1
-            transaction.update()
-        end
         sql = "DELETE FROM budgets WHERE id = $1"
         values = [@id]
         SqlRunner.run(sql, values)

@@ -8,9 +8,9 @@ class Transaction
         @id = options['id'].to_i if options['id']
         @name = options['name']
         @amount = options['amount'].to_f
-        @merchant_id = options['merchant_id'].to_i
-        @tag_id = options['tag_id'].to_i
-        @budget_id = options['budget_id'].to_i
+        @merchant_id = options['merchant_id']
+        @tag_id = options['tag_id']
+        @budget_id = options['budget_id']
         @date = options['date'].to_s
     end
 
@@ -32,9 +32,9 @@ class Transaction
     end
 
     def show_date()
-        sql = "SELECT TO_CHAR(date, 'dd/mm/yyyy') FROM transactions WHERE id = $1"
+        sql = "SELECT TO_CHAR(date, 'dd/mm/yyyy') as datef FROM transactions WHERE id = $1"
         values = [@id]
-        result = SqlRunner.run(sql, values).first['to_char']
+        result = SqlRunner.run(sql, values).first['datef']
         return result
     end
 
@@ -43,12 +43,29 @@ class Transaction
         budget_id = params[:budget_id].to_i
         tag_id = params[:tag_id].to_i
 
-        transactions = Transaction.all
-        transactions = transactions.find_all {|trans| trans.merchant_id == merchant_id} unless merchant_id == 0
-        transactions = transactions.find_all {|trans| trans.budget_id == budget_id} unless budget_id == 0
-        transactions = transactions.find_all {|trans| trans.tag_id == tag_id} unless tag_id == 0
+        sql = "SELECT * FROM transactions"
+        values = []
+        if merchant_id != 0
+            sql += " WHERE merchant_id = $1"
+            values[0] = merchant_id
+        end
+        if budget_id != 0
+            sql += " WHERE budget_id = $2"
+            values[1] = budget_id
+        end
+        if tag_id != 0
+            sql += " WHERE tag_id = $3"
+            values[2] = tag_id
+        end
+        result = SqlRunner.run(sql, values)
+        return Transaction.map_items(result)
 
-        return transactions
+        # transactions = Transaction.all
+        # transactions = transactions.find_all {|trans| trans.merchant_id == merchant_id} unless merchant_id == 0
+        # transactions = transactions.find_all {|trans| trans.budget_id == budget_id} unless budget_id == 0
+        # transactions = transactions.find_all {|trans| trans.tag_id == tag_id} unless tag_id == 0
+
+        # return transactions
     end
 
     def update()
