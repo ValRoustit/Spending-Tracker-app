@@ -29,8 +29,11 @@ class Budget
     end
 
     def update()
-        sql = "UPDATE budgets SET name = $1 WHERE id = $2"
-        values = [@name, @id]
+        sql = "UPDATE budgets SET
+        (name, amount, alert_limit) 
+        =
+        ($1, $2, $3) WHERE id = $4"
+        values = [@name, @amount, @alert_limit, @id]
         SqlRunner.run(sql, values)
     end
 
@@ -52,9 +55,9 @@ class Budget
         limit = (@amount * @alert_limit)/100
         remain = remain()
         status = remain - limit
-        return "#e6b0c5" if remain < 0 unless @alert_limit == 0
-        return "#b0e0e6" if status >= 0
-        return "#e6d1b0" if status < 0
+        return "#d34b4b" if remain < 0 unless @alert_limit == 0
+        return "#67e778" if status >= 0
+        return "#f19951" if status < 0
     end
 
     def self.all()

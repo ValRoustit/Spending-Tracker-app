@@ -39,12 +39,12 @@
 <table>
     <thead>
         <tr>
-        <th>Transaction</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>Merchant</th>
-        <th>Tag</th>
-        <th>Budget</th>
+            <th>Transaction</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Merchant</th>
+            <th>Tag</th>
+            <th>Budget</th>
         </tr>
     </thead>
     <tbody>
@@ -55,20 +55,20 @@
                 <td>£<%= transaction.amount %> </td>
                 <td>
                     <% if transaction.merchant_id == nil %>
-                        none
+                        -
                     <% else %>
                         <%= transaction.merchant.name %>
                     <% end %>
                 </td>
                 <td>
                     <% if transaction.tag_id == nil %>
-                        none
+                        -
                     <% else %>
                         <%= transaction.tag.name %>
                     <% end %>
                 </td>
                 <% if transaction.budget_id == nil %>
-                    <td>none</td>
+                    <td>-</td>
                 <% else %>
                     <td style="background-color:<%= transaction.budget.alert%>;">
                         <a href="/spending-tracker/my-budgets/<%= transaction.budget_id%>"><%= transaction.budget.name %></a>

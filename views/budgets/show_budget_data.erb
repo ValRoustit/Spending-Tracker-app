@@ -14,18 +14,15 @@
     id="amount"
     type="float"
     name="amount"
-    value="<%= @budget.amount%>"
+    value="<%= @budget.amount %>"
     required/>
 
 <label for="alert-under">Alert:</label> 
 <select name="alert_limit" id="alert-limit">
-    <% for alert in [50, 25, 10, 0] %>
-        <% if alert == @budget.alert_limit%>
-            <option value="<%= @budget.alert_limit %>" selected><%= @budget.alert_limit%>% left</option>
-        <% else %>
-            <option value="<%= @budget.alert_limit %>"><%= alert %>% left</option>
-        <% end %>
-    <% end %>
+        <option value="50" <%= 'selected' if @budget.alert_limit == 50 %>>50% left</option>
+        <option value="25" <%= 'selected' if @budget.alert_limit == 25 %>>25% left</option>
+        <option value="10" <%= 'selected' if @budget.alert_limit == 10 %>>10% left</option>
+        <option value="0" <%= 'selected' if @budget.alert_limit == 0 %>>0% left</option>
 </select>
 
 
