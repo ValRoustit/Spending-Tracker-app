@@ -1,6 +1,8 @@
+<div id="index" class="flex-container">
+    <h3 class="flex-container" id="title"><a href="/spending-tracker/my-tags">My tags</a></h3>
+</div>
+
 <form method="post" action="/spending-tracker/my-tags/<%= @tag.id %>">
-<h2><a href="/spending-tracker/my-tags">My tags</a></h2>
-<h3>Edit tag</h3>
 
 <label for="name"></label>
 <input
@@ -8,6 +10,9 @@
     type="text"
     name="name"
     value="<%= @tag.name %>"/>
+
+<input type="submit" id="update" name="update" value="Update">
+<input type="submit" id="delete" name="delete" value="Delete">
 
 <table>
     <thead>
@@ -34,7 +39,4 @@
     </tbody>
 </table>
 
-
-<input type="submit" id="update" name="update" value="Update">
-<input type="submit" id="delete" name="delete" value="Delete">
 </form>

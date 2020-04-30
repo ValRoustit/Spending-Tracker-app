@@ -1,6 +1,14 @@
+<div id="index" class="flex-container">
+    <h3 class="flex-container" id="title"><a href="/spending-tracker/my-merchants">My merchants</a></h3>
+</div>
+
 <form method="post" action="/spending-tracker/my-merchants">
 
-<h3>My merchants</h3>
+<div id="index" class="flex-container">
+    <% for merchant in @merchants %>
+        <h3 class="flex-container" id="title"><a href="/spending-tracker/my-merchants/<%= merchant.id %>"><%= merchant.name %></a></h3>
+    <% end %>
+</div>
 
 <label for="name"></label>
 <input
@@ -8,12 +16,7 @@
     type="text"
     name="name"
     value=""
-    placeholder="add maerchant"/>
-
-
-<% for merchant in @merchants %>
-    <p><a href="/spending-tracker/my-merchants/<%= merchant.id %>"><%= merchant.name %></a></p>
-<% end %>
+    placeholder="add merchant"/>
 
 <input type="submit" id="new" name="new" value="New">
 </form>

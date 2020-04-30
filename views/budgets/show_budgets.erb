@@ -1,6 +1,8 @@
-<h3>My budgets</h3>
+<h3 class="flex-container">My budgets</h3>
 <p><a href="/spending-tracker/my-budgets/new">Create Budget</a></p>
 
+<div id="index" class="flex-container">
 <% for budget in @budgets %>
-        <p><a href="/spending-tracker/my-budgets/<%= budget.id %>"><%= budget.name %></a></p>
+        <h3 class="flex-container" id="title"><a href="/spending-tracker/my-budgets/<%= budget.id %>"><%= budget.name %></a></h3>
 <% end %>
+</div>

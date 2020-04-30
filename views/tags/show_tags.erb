@@ -1,6 +1,14 @@
+<div id="index" class="flex-container">
+    <h3 class="flex-container" id="title"><a href="/spending-tracker/my-tags">My tags</a></h3>
+</div>
+
 <form method="post" action="/spending-tracker/my-tags">
 
-<h3>My tags</h3>
+<div id="index" class="flex-container">
+    <% for tag in @tags %>
+        <h3 class="flex-container" id="title"><a href="/spending-tracker/my-tags/<%= tag.id %>"><%= tag.name %></a></h3>
+    <% end %>
+</div>
 
 <label for="name"></label>
 <input
@@ -9,11 +17,6 @@
     name="name"
     value=""
     placeholder="add tag"/>
-
-
-<% for tag in @tags %>
-        <p><a href="/spending-tracker/my-tags/<%= tag.id %>"><%= tag.name %></a></p>
-<% end %>
 
 <input type="submit" id="new" name="new" value="New">
 </form>

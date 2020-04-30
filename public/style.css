@@ -10,8 +10,8 @@ h1 {
     height: 60px;
 }
 
+
 a:link, a:visited {
-    color: black;
     text-transform: uppercase;
     text-align: center;
     text-align: justify;
@@ -22,14 +22,44 @@ h1 a {
     color: white;
 }
 
+h3 a {
+    color: white;
+}
+
+td a {
+    color: black;
+}
+
+td a:hover {
+    background-color: rgb(106, 207, 145);
+    color: white;
+}
+
+
 .flex-container {
+    /* background-color: #3db1c1; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    height: 300px;
     align-content: space-between;
     align-content: center;
 }
+
+.flex-container > #title_main {
+    background-color: #3db1c1;
+    height: 60px;
+}
+
+.flex-container > #title {
+    background-color: #3db1c1;
+    height: 60px;
+    width: 180px;
+    margin: 5px;
+}
+
+/* #index {
+    flex-wrap: wrap;
+} */
 
 .shape {
     margin: 0 5px;
